@@ -33,3 +33,11 @@ source .env
 nptel COURSE_ID
 
 ```
+# Credits
+Ministry of Education (MoE), Government of India
+
+NPTEL (National Programme on Technology Enhanced Learning)
+
+Professors who have contributed to NPTEL
+
+Everyone else who have contributed to NPTEL
