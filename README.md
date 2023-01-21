@@ -6,7 +6,7 @@ Download NPTEL videos courses using scrapy
 
 * Go to the site https://nptel.ac.in/courses
 
-* Select the course you want to download
+* Select the course you want to download (only Video lectures are supported for now)
 
 * Link for a course would be similiar to "https://nptel.ac.in/courses/COURSE_ID"
 
