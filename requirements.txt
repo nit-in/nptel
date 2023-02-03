@@ -1,2 +1,2 @@
 itemadapter==0.7.0
-Scrapy==2.7.1
+Scrapy==2.8.0
