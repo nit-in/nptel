@@ -5,7 +5,6 @@ from pathlib import Path
 
 class NPTELSpider(scrapy.Spider):
 	name = 'nptel'
-	allowed_domains = ['https://archive.nptel.ac.in']
 
 	def start_requests(self):
 		url = 'https://tools.nptel.ac.in/npteldata/downloads.php?id='
