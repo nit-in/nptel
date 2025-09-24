@@ -50,18 +50,17 @@ class NPTELSpider(scrapy.Spider):
 
             if not fpath.exists():
                 mplinks.append(str(urlp))
-                print(f"Adding {str(fpath)} to list")
+                print(f"Adding {str(urlp)} to list")
             else:
                 print(f"File {str(fpath)} is already downloaded")
 
         dtfname = str(dwnfl) + str(txtext)
         dtfile = Path(cwd, dtfname)
 
-        with open(str(dtfile), "w") as lfile:
+        with open(str(dtfile), "w", encoding="utf-8") as lfile:
             for pl in mplinks:
                 lfile.write(f"{str(pl)}\n")
-
-        self.download_vid(str(lfile), fpath)
+        self.download_vid(str(lfile.name), fpath)
 
     def download_vid(self, link, vid_path):
         program = "aria2c"
