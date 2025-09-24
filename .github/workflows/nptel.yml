@@ -51,7 +51,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1.14.0
         with:
-          artifacts: "/home/runner/nptel_videos/**/*.{mp4,mkv}"
+          artifacts: "/home/runner/nptel_videos/**/*.mp4"
           token: ${{ secrets.NPTEL }}
           tag: "NPTEL_${{ env.NPTEL_TAG }}"
           allowUpdates: true
