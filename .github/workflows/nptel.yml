@@ -52,7 +52,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           artifacts: "/home/runner/nptel_videos/**/*.{mp4,mkv}"
-          token: ${{ secrets.PIB }}
+          token: ${{ secrets.NPTEL }}
           tag: "NPTEL_${{ env.NPTEL_TAG }}"
           allowUpdates: true
           body : "NPTEL videos for course Id ${{ env.NPTEL_TAG }}"
