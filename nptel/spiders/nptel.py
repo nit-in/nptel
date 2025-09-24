@@ -2,7 +2,7 @@ import scrapy
 import json
 import subprocess
 from pathlib import Path
-
+import re
 
 cwd = Path.cwd()
 dwnfl = "dwn"
@@ -21,6 +21,7 @@ class NPTELSpider(scrapy.Spider):
 
     def parse(self, response):
         mplinks = []
+        mpname = []
         nptel_dir = Path("~/nptel_videos").expanduser()
         self.chkdir(nptel_dir)
 
@@ -40,16 +41,18 @@ class NPTELSpider(scrapy.Spider):
         for i in range(0, list_vid):
             print(x[i]["title"])
             print(x[i]["url"])
-            print(x[i]["lesson_id"])
 
             tit = str(x[i]["title"])
             urlp = str(x[i]["url"])
             lesid = str(x[i]["lesson_id"])
-            tt = "L" + lesid + "_" + tit.replace(" ", "_") + ".mp4"
+            ffname = re.sub("[`~!@#$%^&*();:',.+=\"<>|\\/?\n\t\r]", "", tit)
+            ftname = ffname.replace(" ", "_") + ".mp4"
+            tt = "L" + lesid + "_" + str(ftname)
             fpath = Path(course_folder_p, tt)
 
             if not fpath.exists():
                 mplinks.append(str(urlp))
+                mpname.append(str(ftname))
                 print(f"Adding {str(urlp)} to list")
             else:
                 print(f"File {str(fpath)} is already downloaded")
@@ -58,9 +61,9 @@ class NPTELSpider(scrapy.Spider):
         dtfile = Path(cwd, dtfname)
 
         with open(str(dtfile), "w", encoding="utf-8") as lfile:
-            for pl in mplinks:
-                lfile.write(f"{str(pl)}\n")
-        self.download_vid(str(lfile.name), fpath)
+            for pl, fna in zip(mplinks, mpname):
+                lfile.write(f"{str(pl)}\n out={str(fna)}\n\n")
+        self.download_vid(str(lfile.name), course_folder_p)
 
     def download_vid(self, link, vid_path):
         program = "aria2c"
