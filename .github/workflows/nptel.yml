@@ -21,7 +21,7 @@ on:
 
 jobs:
 
-  pib_articles:
+  nptel_vids:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,7 +32,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         run:  |
           sudo apt update
-          sudo apt install --fix-missing -y python3 wkhtmltopdf fd-find poppler-utils
+          sudo apt install --fix-missing -y python3 aria2 wkhtmltopdf fd-find poppler-utils
           sudo ln -s $(which fdfind) /usr/bin/fd
           sudo pip install -r requirements.txt
           mkdir -p /home/runner/nptel
@@ -48,10 +48,10 @@ jobs:
           source .env
           nptel ${{ inputs.courseId }}
 
-      - name: Create Monthly zip
+      - name: Create release
         uses: ncipollo/release-action@v1.14.0
         with:
-          artifacts: "/home/runner/nptel/**/*.{mp4,mkv}"
+          artifacts: "/home/runner/nptel_videos/**/*.{mp4,mkv}"
           token: ${{ secrets.PIB }}
           tag: "NPTEL_${{ env.NPTEL_TAG }}"
           allowUpdates: true
