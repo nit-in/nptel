@@ -55,4 +55,4 @@ jobs:
           token: ${{ secrets.NPTEL }}
           tag: "NPTEL_${{ env.NPTEL_TAG }}"
           allowUpdates: true
-          body : "NPTEL videos for course Id ${{ env.NPTEL_TAG }}"
+          body : "NPTEL videos for course ${{ env.NPTEL_TAG }}, course id ${{ inputs.courseId }}"
